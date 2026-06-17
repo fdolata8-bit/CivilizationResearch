@@ -2,13 +2,10 @@ import random
 
 class Swiat:
     def __init__(self):
-        self.rok = 0
         self.wynalazki = []
 
     def krok(self, agent):
-        self.rok += 1
-
-        # rozwój agenta
+        # agent się rozwija
         agent.rozwoj()
 
         # szansa na wynalazek
@@ -16,15 +13,16 @@ class Swiat:
             self.nowy_wynalazek()
 
     def nowy_wynalazek(self):
-        lista = [
-            ("Ogień", "kontrola ognia"),
-            ("Koło", "transport"),
-            ("Rolnictwo", "produkcja jedzenia"),
-            ("Pismo", "zapis informacji"),
+        mozliwe = [
+            "Ogień",
+            "Koło",
+            "Pismo",
+            "Rolnictwo",
+            "Narzędzia kamienne"
         ]
 
-        w = random.choice(lista)
+        w = random.choice(mozliwe)
 
         if w not in self.wynalazki:
             self.wynalazki.append(w)
-            print(f"🧠 WYNALAZEK: {w[0]} - {w[1]}")
+            print("🧠 Wynalazek:", w)
