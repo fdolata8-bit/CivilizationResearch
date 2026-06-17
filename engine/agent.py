@@ -1,10 +1,29 @@
+import random
+
+
 class Agent:
     def __init__(self, imie):
         self.imie = imie
-        self.iq = 100
+        self.iq = random.randint(80, 140)
         self.wiedza = 0
-        self.ciekawosc = 50
+        self.ciekawosc = random.randint(1, 100)
 
     def ucz_sie(self):
-        self.wiedza += 1
-        print(self.imie, "uczy się. Wiedza:", self.wiedza)
+        przyrost = max(1, self.iq // 50)
+        self.wiedza += przyrost
+
+        print(
+            self.imie,
+            "IQ:",
+            self.iq,
+            "Wiedza:",
+            self.wiedza
+        )
+
+    def czy_odkryl_cos(self):
+        szansa = self.ciekawosc + (self.iq // 2)
+
+        if random.randint(1, 1000) < szansa:
+            return True
+
+        return False
