@@ -1,18 +1,16 @@
 from agent import Agent
 from swiat import Swiat
 
-
 swiat = Swiat()
+agent = Agent()
 
-adam = Agent("Adam")
-ewa = Agent("Ewa")
+print("🚀 START CYWILIZACJI")
 
-swiat.dodaj_agenta(adam)
-swiat.dodaj_agenta(ewa)
+for i in range(200):
+    swiat.krok(agent)
 
-for _ in range(10):
-    swiat.wykonaj_ture()
+print("\n🌍 KONIEC")
+print("Wynalazki:")
 
-swiat.baza_wiedzy.pokaz_wynalazki()
-print("\n=== WYNALAZKI / ODKRYCIA ===")
-print(swiat)
+for w in swiat.wynalazki:
+    print("-", w)
