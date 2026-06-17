@@ -1,25 +1,30 @@
-from agent import Agent
-from wiedza import BazaWiedzy
-
+import random
 
 class Swiat:
     def __init__(self):
-        self.tura = 0
-        self.agenci = []
-        self.baza_wiedzy = BazaWiedzy()
+        self.rok = 0
+        self.wynalazki = []
 
-    def dodaj_agenta(self, agent):
-        self.agenci.append(agent)
+    def krok(self, agent):
+        self.rok += 1
 
-    def wykonaj_ture(self):
-        self.tura += 1
+        # rozwój agenta
+        agent.rozwoj()
 
-        print("")
-        print("=== TURA", self.tura, "===")
+        # szansa na wynalazek
+        if random.random() < agent.inteligencja:
+            self.nowy_wynalazek()
 
-        for agent in self.agenci:
-            agent.ucz_sie()
+    def nowy_wynalazek(self):
+        lista = [
+            ("Ogień", "kontrola ognia"),
+            ("Koło", "transport"),
+            ("Rolnictwo", "produkcja jedzenia"),
+            ("Pismo", "zapis informacji"),
+        ]
 
-            if agent.czy_odkryl_cos():
-                nazwa = f"Odkrycie_{self.tura}_{agent.imie}"
-                self.baza_wiedzy.dodaj_wynalazek(nazwa)
+        w = random.choice(lista)
+
+        if w not in self.wynalazki:
+            self.wynalazki.append(w)
+            print(f"🧠 WYNALAZEK: {w[0]} - {w[1]}")
