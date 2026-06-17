@@ -14,3 +14,5 @@ for _ in range(10):
     swiat.wykonaj_ture()
 
 swiat.baza_wiedzy.pokaz_wynalazki()
+print("\n=== WYNALAZKI / ODKRYCIA ===")
+print(swiat)
