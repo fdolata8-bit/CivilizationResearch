@@ -20,5 +20,6 @@ class Swiat:
         for agent in self.agenci:
             agent.ucz_sie()
 
-        if self.tura == 5:
-            self.baza_wiedzy.dodaj_wynalazek("Ogień")
+            if agent.czy_odkryl_cos():
+                nazwa = f"Odkrycie_{self.tura}_{agent.imie}"
+                self.baza_wiedzy.dodaj_wynalazek(nazwa)
