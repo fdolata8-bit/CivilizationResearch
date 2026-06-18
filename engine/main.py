@@ -1,20 +1,28 @@
+import time
 from agent import Agent
 from swiat import Swiat
 
 swiat = Swiat()
-agent = Agent()
 
-print("🚀 START CYWILIZACJI\n")
+agenci = [
+    Agent("scholar"),
+    Agent("farmer"),
+    Agent("warrior")
+]
 
-for i in range(200):
-    swiat.krok(agent)
+print("🚀 CYWILIZACJA URUCHOMIONA - TRYB CIĄGŁY\n")
 
-print("\n🌍 KONIEC SYMULACJI\n")
+tick = 0
 
-print("🧠 WYNALAZKI:")
-for i, w in enumerate(swiat.wynalazki, 1):
-    print(f"{i}. {w[0]} — {w[1]}")
+while True:
+    tick += 1
 
-print("\n📜 HISTORIA CYWILIZACJI:\n")
-for h in swiat.historia:
-    print("•", h)
+    for agent in agenci:
+        swiat.krok(agent)
+
+    # co jakiś czas pokazuj status
+    if tick % 20 == 0:
+        print(f"\n⏳ Tura: {tick}")
+        print(f"🧠 Wynalazki: {len(swiat.wynalazki)}")
+
+    time.sleep(0.1)  # spowalnia żebyś widział rozwój
