@@ -1,28 +1,23 @@
-import time
 from agent import Agent
 from swiat import Swiat
+import random
+
+# 1000 agentów
+agenci = [Agent() for _ in range(1000)]
 
 swiat = Swiat()
 
-agenci = [
-    Agent("scholar"),
-    Agent("farmer"),
-    Agent("warrior")
-]
+print("🚀 START EMERGENTNEJ CYWILIZACJI\n")
 
-print("🚀 CYWILIZACJA URUCHOMIONA - TRYB CIĄGŁY\n")
+for i in range(5000):
 
-tick = 0
+    swiat.krok(agenci)
 
-while True:
-    tick += 1
+    if i % 200 == 0:
+        print(f"⏳ Rok {i} | idee: {len(swiat.idee)} | wynalazki: {len(swiat.wynalazki)}")
 
-    for agent in agenci:
-        swiat.krok(agent)
+print("\n🌍 KONIEC")
 
-    # co jakiś czas pokazuj status
-    if tick % 20 == 0:
-        print(f"\n⏳ Tura: {tick}")
-        print(f"🧠 Wynalazki: {len(swiat.wynalazki)}")
-
-    time.sleep(0.1)  # spowalnia żebyś widział rozwój
+print("\n🧠 WYNALEZKI EMERGENTNE:")
+for w in swiat.wynalazki:
+    print("-", w)
