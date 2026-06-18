@@ -2,28 +2,35 @@ import random
 
 class Swiat:
     def __init__(self):
+        self.rok = 0
+        self.idee = []
         self.wynalazki = []
-        self.historia = []
 
-    def krok(self, agent):
-        agent.rozwoj()
+    def krok(self, agenci):
+        self.rok += 1
 
-        if random.random() < agent.inteligencja:
-            self.nowy_wynalazek()
+        nowe_idee = []
 
-    def nowy_wynalazek(self):
-        lista = [
-            ("Ogień", "kontrola ognia"),
-            ("Koło", "transport"),
-            ("Pismo", "zapis informacji"),
-            ("Rolnictwo", "produkcja jedzenia"),
-            ("Narzędzia kamienne", "pierwsze narzędzia"),
-            ("Metalurgia", "obróbka metalu"),
-        ]
+        # zbieranie idei od agentów
+        for agent in agenci:
+            idea = agent.krok()
+            if idea:
+                nowe_idee.append(idea)
 
-        w = random.choice(lista)
+        self.idee.extend(nowe_idee)
 
-        if w not in self.wynalazki:
-            self.wynalazki.append(w)
-            self.historia.append(f"{w[0]} - {w[1]}")
-            print(f"🧠 NOWY WYNALAZEK: {w[0]} - {w[1]}")
+        # emergencja wynalazków
+        if len(self.idee) > 5:
+            self.probuj_wynalazek()
+
+    def probuj_wynalazek(self):
+        if random.random() < 0.3:
+            a = random.choice(self.idee)
+            b = random.choice(self.idee)
+
+            if a != b:
+                nowy = f"{a} + {b}"
+
+                if nowy not in self.wynalazki:
+                    self.wynalazki.append(nowy)
+                    print(f"🧠 [{self.rok}] NOWY WYNALAZEK: {nowy}")
